@@ -7,6 +7,7 @@ const Form = () => {
     };
     const [state,setState]=useState(title.inputTitle);
     const [textarea,settextarea]=useState(title.textAreatitle);
+    const [select,setSelect]=useState("");
     
     const handleClick = (e)=>{
         if(e.target.type==="text"){
@@ -15,13 +16,22 @@ const Form = () => {
         else if(e.target.type==="textarea"){
             settextarea(e.target.value);
         }
+        else if(e.target.type==="select-one"){
+            setSelect(e.target.value);
+        }
         else{
+            console.log(e.target.type)
             console.log("nothing here!!")
         }
             
     }
+    const submitHandler = (e)=>{
+         e.preventDefault();
+         console.log(state, textarea,select)
+    }
     return (
         <div>
+            <form onSubmit={submitHandler}>
             <input 
                 type="text" 
                 placeholder='Enter title' 
@@ -38,6 +48,20 @@ const Form = () => {
                 rows="10"
             >   
             </textarea>
+            <br />
+            <br />
+            <select onChange={handleClick}>
+                    <option value="React">React</option>
+                    <option value="Javascript">Javascript</option>
+                    <option value="Javascript">Java</option>
+                    
+            </select>
+            <br />
+            <br />
+            <input type="submit" value="submit"></input>
+
+            </form>
+          
         </div>
     );
 };
